@@ -1,7 +1,11 @@
+
+zonageeol = read_sf("EMR_transmis_OSPAR_oct22")
+
 # Carte des régions de France + éoliennes en mer
 library(rmapshaper)
 
 regionfrancaise = read_sf("regions-20180101-shp")
+
 ggplot() +
   geom_sf(data = ms_filter_islands(regionfrancaise, 1400E8))+
   geom_sf(data=zonageeol,
@@ -15,7 +19,7 @@ paysLoire <- filter(regionfrancaise, nom == "Pays de la Loire")
 eolguérande <- filter(zonageeol, Site == "Saint-Nazaire")
 
 library(maps)
-view(world.cities)
+view(world.cities) # Rajout des 3 villes
 
 france_cities_PDLL <- world.cities %>% # PDLL pour pays de la loire
   filter(country.etc == "France") %>%
@@ -56,7 +60,7 @@ ggplot() +
   scale_size(range = c(1, 10)) + 
   scale_fill_manual(values = c('Parc éolien de St-Nazaire' = 'lightblue')) +
   theme_void() +
-  # Ajoutez un titre
+  # Ajout titre
   labs(title = "Loire-Atlantique")
 
 
